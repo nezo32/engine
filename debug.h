@@ -1,0 +1,9 @@
+#ifndef HEADERS_GLOBAL_DEBUG_H_
+#define HEADERS_GLOBAL_DEBUG_H_
+
+#ifdef _DEBUG
+//#define DEBUG_CURSOR_POSITION
+//#define DEBUG_DELTA_TIME
+#endif // _DEBUG
+
+#endif // !HEADERS_GLOBAL_DEBUG_H_
