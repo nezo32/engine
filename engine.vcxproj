@@ -70,6 +70,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <CopyLocalProjectReference>true</CopyLocalProjectReference>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <CopyLocalProjectReference>true</CopyLocalProjectReference>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -141,20 +147,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="attibute.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="uniform.cpp" />
     <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
-    <ClCompile Include="ShaderSystem.cpp" />
+    <ClCompile Include="ShaderSubSystem.cpp" />
+    <ClCompile Include="TextureSubSystem.cpp" />
     <ClCompile Include="WindowSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="attribute.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Circle.h" />
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Primitive.h" />
+    <ClInclude Include="Quad.h" />
     <ClInclude Include="RenderSystem.h" />
-    <ClInclude Include="ShaderSystem.h" />
+    <ClInclude Include="ShaderSubSystem.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="TextureSubSystem.h" />
+    <ClInclude Include="Triangle.h" />
     <ClInclude Include="typedefs.h" />
+    <ClInclude Include="uniform.h" />
     <ClInclude Include="vertex.h" />
     <ClInclude Include="WindowSystem.h" />
   </ItemGroup>

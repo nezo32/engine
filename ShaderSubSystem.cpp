@@ -1,11 +1,7 @@
-#include "ShaderSystem.h"
+#include "ShaderSubSystem.h"
 
-ShaderSystem::ShaderSystem(const char* vertexPath, const char* fragmentPath, const char* geometryPath) {
+ShaderSubSystem::ShaderSubSystem(const char* vertexPath, const char* fragmentPath, const char* geometryPath) {
 	program = glCreateProgram();
-
-	GLuint vertex = 0;
-	GLuint fragment = 0;
-	GLuint geometry = 0;
 
 	if (strcmp(vertexPath, "") != 0)
 		vertex = loadShader(GL_VERTEX_SHADER, vertexPath);
@@ -14,14 +10,26 @@ ShaderSystem::ShaderSystem(const char* vertexPath, const char* fragmentPath, con
 	if (strcmp(fragmentPath, "") != 0)
 		fragment = loadShader(GL_FRAGMENT_SHADER, fragmentPath);
 
+	tempSource.clear();
 	linkProgram(vertex, fragment, geometry);
 }
 
-ShaderSystem::~ShaderSystem() {
+ShaderSubSystem::~ShaderSubSystem() {
+	ClearShaders();
 	glDeleteProgram(program);
 }
 
-void ShaderSystem::loadSource(const char* path) {
+void ShaderSubSystem::Use() {
+ 	glUseProgram(program);
+}
+
+void ShaderSubSystem::ClearShaders() {
+	glDeleteShader(vertex);
+	glDeleteShader(geometry);
+	glDeleteShader(fragment);
+}
+
+void ShaderSubSystem::loadSource(const char* path) {
 	std::ifstream file;
 	std::stringstream stream;
 
@@ -29,7 +37,7 @@ void ShaderSystem::loadSource(const char* path) {
 	if (file.is_open())
 		stream << file.rdbuf();
 	else {
-		std::cerr << "ERROR :: ShaderSystem :: Failed to open file - " << path << "\n";
+		std::cerr << "ERROR :: ShaderSystem :: Failed to open file - '" << path << "'\n";
 		throw std::exception();
 	}
 
@@ -38,7 +46,7 @@ void ShaderSystem::loadSource(const char* path) {
 	tempSource = stream.str();
 }
 
-GLuint ShaderSystem::loadShader(GLenum type, const char* path) {
+GLuint ShaderSubSystem::loadShader(GLenum type, const char* path) {
 	memset(this->log, 0, LOG_SIZE);
 	GLint success;
 
@@ -51,7 +59,7 @@ GLuint ShaderSystem::loadShader(GLenum type, const char* path) {
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 	if (!success) {
 		glGetShaderInfoLog(shader, LOG_SIZE, NULL, this->log);
-		std::cerr << "ERROR :: ShaderSystem :: Failed to compile shader - " << path << "\n";
+		std::cerr << "ERROR :: ShaderSystem :: Failed to compile shader - '" << path << "'\n";
 		std::clog << this->log << "\n";
 		throw std::exception();
 	}
@@ -59,7 +67,7 @@ GLuint ShaderSystem::loadShader(GLenum type, const char* path) {
 	return shader;
 }
 
-GLint ShaderSystem::linkProgram(GLuint vertex, GLuint fragment, GLuint geometry) {
+GLint ShaderSubSystem::linkProgram(GLuint vertex, GLuint fragment, GLuint geometry) {
 	memset(this->log, 0, LOG_SIZE);
 	GLint success;
 
@@ -80,10 +88,6 @@ GLint ShaderSystem::linkProgram(GLuint vertex, GLuint fragment, GLuint geometry)
 		std::clog << this->log << "\n";
 		throw std::exception();
 	}
-
-	glDeleteShader(vertex);
-	glDeleteShader(geometry);
-	glDeleteShader(fragment);
 
 	return success;
 }

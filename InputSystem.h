@@ -1,3 +1,6 @@
+#ifndef HEADERS_INPUT_SYSTEM_H_
+#define HEADERS_INPUT_SYSTEM_H_
+
 #include <glew.h>
 #include <glfw3.h>
 #include <iostream>
@@ -10,17 +13,19 @@
 struct CursorState {
 	double x;
 	double y;
+
 	double offsetX;
 	double offsetY;
+
+	double yaw;
+	double pitch;
+
+	double sensitivity;
+
 	double lastX;
 	double lastY;
-	bool flag;
-};
 
-struct DeltaTime {
-	float deltaTime;
-	float currentTime;
-	float lastTime;
+	bool flag;
 };
 
 typedef std::function<void(GLFWwindow* window, CursorState* state)> cursorCallback;
@@ -30,8 +35,6 @@ typedef std::function<void(GLFWwindow* window)> keyboardCallback;
 class InputSystem {
 private:
 	inline static InputSystem* staticPointer;
-
-	DeltaTime* deltaTime;
 	CursorState* cursorState;
 
 	std::vector<cursorCallback> cursorCallbacks;
@@ -41,8 +44,6 @@ private:
 	void cursorInput();
 	void mouseInput();
 	void keyboardInput();
-
-	void updateDeltaTime();
 public:
 	GLFWwindow* window;
 
@@ -50,7 +51,11 @@ public:
 	~InputSystem();
 
 	void Input();
+
 	void ChangeCursorInputMode(int mode);
+	int GetCursorInputMode();
+
+	void ResetCursorState();
 
 	int GetKeyDown(int key);
 	int GetMouseButton(int button);
@@ -59,3 +64,5 @@ public:
 	void AddMouseCallback(mouseCallback cb);
 	void AddKeyboardCallback(keyboardCallback cb);
 };
+
+#endif // !HEADERS_INPUT_SYSTEM_H_

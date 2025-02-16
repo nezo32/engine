@@ -1,10 +1,13 @@
+#ifndef HEADERS_SHADER_SUB_SYSTEM_H_
+#define HEADERS_SHADER_SUB_SYSTEM_H_
+
 #include <glew.h>
 #include <fstream>
 #include <sstream>
 #include <iostream>
 #include "typedefs.h"
 
-class ShaderSystem {
+class ShaderSubSystem {
 private:
 	static const ushort LOG_SIZE = 1024;
 	char log[LOG_SIZE] = { '\0' };
@@ -19,6 +22,14 @@ private:
 public:
 	GLuint program;
 
-	ShaderSystem(const char* vertexPath, const char* fragmentPath, const char* geometryPath = "");
-	~ShaderSystem();
+	GLuint vertex = 0;
+	GLuint fragment = 0;
+	GLuint geometry = 0;
+
+	void ClearShaders();
+	void Use();
+	ShaderSubSystem(const char* vertexPath, const char* fragmentPath, const char* geometryPath = "");
+	~ShaderSubSystem();
 };
+
+#endif // !HEADERS_SHADER_SUB_SYSTEM_H_

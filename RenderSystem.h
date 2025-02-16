@@ -1,32 +1,43 @@
+#ifndef HEADERS_RENDER_SYSTEM_H_
+#define HEADERS_RENDER_SYSTEM_H_
+
 #include <glew.h>
 #include <glfw3.h>
 #include <iostream>
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
 #include "vertex.h"
+#include "uniform.h"
+#include "TextureSubSystem.h"
+#include "ShaderSubSystem.h"
+#include "WindowSystem.h"
+#include "Camera.h"
+#include "Mesh.h"
+
 
 class RenderSystem
 {
 private:
-	GLuint program;
-	GLuint VAO;
-	GLuint VBO;
-	GLuint EBO;
+	WindowSystem* ws;
+	Camera* camera;
+	ShaderSubSystem* coreShader;
 
-	inline static Vertex vertices[] = {
-		// POSITION							// COLOR						// TEXTURE POSITION
-		glm::vec3(0.f, 0.5f, 0.f),			glm::vec3(1.0f, 0.f, 0.f),		glm::vec2(0.f, 1.f),
-		glm::vec3(-0.5f, -0.5f, 0.f),		glm::vec3(0.0f, 1.f, 0.f),		glm::vec2(0.f, 0.f),
-		glm::vec3(0.5f, -0.5f, 0.f),		glm::vec3(0.0f, 0.f, 1.f),		glm::vec2(1.f, 0.f),
-	};
-	inline static unsigned verticesCount = sizeof(vertices) / sizeof(Vertex);
+	std::vector<Mesh*> meshes;
 
-	inline static GLuint indices[] = { 0, 1, 2 };
-	inline static unsigned int indicesCount = sizeof(indices) / sizeof(GLuint);
+	float fov = 45.f;
+	float near = 0.1f;
+	float far = 1000.f;
 
+	void usePerspective();
 	void configureOpenGLOptions();
 public:
-	RenderSystem(GLuint program);
+	RenderSystem(WindowSystem* ws, ShaderSubSystem* coreShader, std::vector<Mesh*>& meshes);
 	~RenderSystem();
 
 	void Render();
 	void Clear();
+
+	inline void BindCamera(Camera* cam) { camera = cam; };
 };
+
+#endif // !HEADERS_RENDER_SYSTEM_H_

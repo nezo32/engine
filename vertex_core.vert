@@ -8,10 +8,17 @@ out vec3 vs_position;
 out vec3 vs_color;
 out vec2 vs_textureCoordinate;
 
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+//uniform float ratio;
+
 void main() {
+	//vec3 ratio_position = vec3(vertex_position.x / ratio, vertex_position.yz);
+
 	vs_position = vertex_position;
 	vs_color = vertex_color;
-	vs_textureCoordinate = vec2(vertex_textureCoordinate.x, vertex_textureCoordinate.y * -1.f);
+	vs_textureCoordinate = vec2(vertex_textureCoordinate.x, vertex_textureCoordinate.y * -1);
 
-	gl_Position = vec4(vertex_position, 1.f);
+	gl_Position = projection * view * model * vec4(vertex_position, 1.f);
 }

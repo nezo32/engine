@@ -3,20 +3,16 @@
 InputSystem::InputSystem(GLFWwindow* window) {
 	this->window = window;
 
-	deltaTime = new DeltaTime{
-		0.f,
-		0.f,
-		0.f
-	};
-
 	cursorState = new CursorState{
 		0.0, 0.0,
 		0.0, 0.0,
+		-90.0, 0.0,
+		0.1,
 		0.0, 0.0,
 		true
 	};
 
-	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	staticPointer = this;
 }
 
@@ -40,9 +36,30 @@ void InputSystem::cursorInput() {
 	cursorState->offsetX = cursorState->x - cursorState->lastX;
 	cursorState->offsetY = cursorState->y - cursorState->lastY;
 
+	// SENSITIVITY
+	cursorState->offsetX *= cursorState->sensitivity;
+	cursorState->offsetY *= cursorState->sensitivity;
+
 	// LAST
 	cursorState->lastX = cursorState->x;
 	cursorState->lastY = cursorState->y;
+
+	// YAW PITCH
+	cursorState->yaw += cursorState->offsetX;
+	cursorState->pitch += cursorState->offsetY;
+
+	if (cursorState->pitch > 89.0)
+		cursorState->pitch = 89.0;
+	if (cursorState->pitch < -89.0)
+		cursorState->pitch = -89.0;
+
+	// CENTRALIZE
+	int width = 0;
+	int height = 0;
+	glfwGetWindowSize(window, &width, &height);
+
+	cursorState->x = float(width) / 2.f;
+	cursorState->y = float(height) / 2.f;
 
 	std::for_each(cursorCallbacks.begin(), cursorCallbacks.end(), [](cursorCallback cb) {
 		cb(staticPointer->window, staticPointer->cursorState);
@@ -59,23 +76,13 @@ void InputSystem::keyboardInput() {
 	std::for_each(keyboardCallbacks.begin(), keyboardCallbacks.end(), [](keyboardCallback cb) {
 		cb(staticPointer->window);
 	});
-}
-
-void InputSystem::updateDeltaTime() {
-	deltaTime->currentTime = static_cast<float>(glfwGetTime());
-	deltaTime->deltaTime = deltaTime->currentTime - deltaTime->lastTime;
-	deltaTime->lastTime = deltaTime->currentTime;
-
-#ifdef DEBUG_DELTA_TIME
-	std::cout << deltaTime->deltaTime << "\n";
-#endif // DEBUG_DELTA_TIME
-}
+} 
 
 void InputSystem::Input() {
-	updateDeltaTime();
-	cursorInput();
-	mouseInput();
+	if (glfwGetWindowAttrib(window, GLFW_FOCUSED) == GL_FALSE) return;
 	keyboardInput();
+	mouseInput();
+	cursorInput();
 }
 
 void InputSystem::AddCursorCallback(cursorCallback cb) {
@@ -93,6 +100,28 @@ void InputSystem::AddKeyboardCallback(keyboardCallback cb) {
 
 void InputSystem::ChangeCursorInputMode(int mode) {
 	glfwSetInputMode(window, GLFW_CURSOR, mode);
+}
+
+int InputSystem::GetCursorInputMode() {
+	return glfwGetInputMode(window, GLFW_CURSOR);
+}
+
+void InputSystem::ResetCursorState() {
+	int width = 0;
+	int height = 0;
+	glfwGetWindowSize(window, &width, &height);
+
+	float wc = float(width) / 2.f;
+	float wh = float(height) / 2.f;
+
+	cursorState->x = wc;
+	cursorState->y = wh;
+	cursorState->lastX = wc;
+	cursorState->lastY = wh;
+	cursorState->offsetX = 0;
+	cursorState->offsetY = 0;
+	cursorState->flag = true;
+	glfwSetCursorPos(window, wc, wh);
 }
 
 int InputSystem::GetKeyDown(int key) {

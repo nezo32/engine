@@ -16,6 +16,27 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы заголовков\SubSystems">
+      <UniqueIdentifier>{8cccaeeb-c364-4703-9cb2-bae2537e5525}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\SubSystems">
+      <UniqueIdentifier>{b58266bd-6b85-40da-99d3-59c99b4ab767}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Primitives">
+      <UniqueIdentifier>{d28a550d-3ff5-4f58-9b1c-19cb4059aebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Primitives">
+      <UniqueIdentifier>{310b29b3-8f08-4455-a35b-080fd86edbed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Entities">
+      <UniqueIdentifier>{1bc48427-fe42-4733-b7a7-cd5fb0e6b044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Entities">
+      <UniqueIdentifier>{59908200-d23f-4a6b-86a9-62fb4ab47253}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Global">
+      <UniqueIdentifier>{6dfcea90-bf5a-41c8-b8c7-1048d421272d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine.cpp">
@@ -27,14 +48,32 @@
     <ClCompile Include="Game.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderSystem.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="InputSystem.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="RenderSystem.cpp">
       <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureSubSystem.cpp">
+      <Filter>Исходные файлы\SubSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Primitive.cpp">
+      <Filter>Исходные файлы\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Исходные файлы\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderSubSystem.cpp">
+      <Filter>Исходные файлы\SubSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Исходные файлы\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="uniform.cpp">
+      <Filter>Исходные файлы\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="attibute.cpp">
+      <Filter>Исходные файлы\Global</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,11 +95,38 @@
     <ClInclude Include="RenderSystem.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderSystem.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="WindowSystem.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureSubSystem.h">
+      <Filter>Файлы заголовков\SubSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Primitive.h">
+      <Filter>Файлы заголовков\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Quad.h">
+      <Filter>Файлы заголовков\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Файлы заголовков\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Файлы заголовков\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Файлы заголовков\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderSubSystem.h">
+      <Filter>Файлы заголовков\SubSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Файлы заголовков\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="attribute.h">
+      <Filter>Файлы заголовков\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="uniform.h">
+      <Filter>Файлы заголовков\Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,45 +1,40 @@
 #include "RenderSystem.h"
 
-RenderSystem::RenderSystem(GLuint program) {
-	this->program = program;
+RenderSystem::RenderSystem(WindowSystem* ws, ShaderSubSystem* coreShader, std::vector<Mesh*>& meshes) {
+	this->ws = ws;
+	this->coreShader = coreShader;
+	this->meshes = meshes;
 
 	configureOpenGLOptions();
-
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
-
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	glGenBuffers(1, &EBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, position));
-	glEnableVertexAttribArray(0);
-
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, color));
-	glEnableVertexAttribArray(1);
-
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, textureCoordinate));
-	glEnableVertexAttribArray(2);
+	TextureSubSystem::ConfigTextureParams();
 }
 
 RenderSystem::~RenderSystem() {
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
+	meshes.clear();
 }
 
 void RenderSystem::Render() {
-	glUseProgram(program);
-	glBindVertexArray(VAO);
-	glDrawElements(GL_TRIANGLES, indicesCount, GL_UNSIGNED_INT, 0);
+	// USE CORE SHADER
+	coreShader->Use();
+
+	// SETUP SPACES
+	camera->Use(coreShader->program);
+	usePerspective();
+	
+	// DRAW MASHES
+	for (Mesh* mesh : meshes) {
+		mesh->Draw();
+	}
 }
 
 void RenderSystem::Clear() {
 	glClearColor(0.f, 0.f, 0.f, 1.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+}
+
+void RenderSystem::usePerspective() {
+	glm::mat4 projection = glm::perspective(glm::radians(fov), ws->GetRatio(), near, far);
+	setUniformM4(coreShader->program, "projection", glm::value_ptr(projection));
 }
 
 void RenderSystem::configureOpenGLOptions(){
