@@ -9,19 +9,24 @@ public:
 		preferableDrawType = DRAW_TYPE_ELEMENT;
 
 		Vertex v[] = {
-			// POSITION							// COLOR							// TEXTURE POSITION
-			glm::vec3(0.5f, 0.5f, 0.f),			color,								glm::vec2(1.0f, 1.0f),
-			glm::vec3(0.5f, -0.5f, 0.f),		color,								glm::vec2(1.0f, 0.0f),
-			glm::vec3(-0.5f, 0.5f, 0.f),		color,								glm::vec2(0.0f, 1.0f),
-			glm::vec3(-0.5f, -0.5f, 0.f),		color,								glm::vec2(0.0f, 0.0f),
+			// POSITION							// COLOR		// TEXTURE POSITION		
+			glm::vec3(0.5f, 0.5f, 0.f),			color,			glm::vec2(1.0f, 1.0f),			glm::vec3(0.f, 0.f, 1.f),
+			glm::vec3(0.5f, -0.5f, 0.f),		color,			glm::vec2(1.0f, 0.0f),			glm::vec3(0.f, 0.f, 1.f),
+			glm::vec3(-0.5f, 0.5f, 0.f),		color,			glm::vec2(0.0f, 1.0f),			glm::vec3(0.f, 0.f, 1.f),
+			glm::vec3(-0.5f, -0.5f, 0.f),		color,			glm::vec2(0.0f, 0.0f),			glm::vec3(0.f, 0.f, 1.f),
+
+			glm::vec3(0.5f, 0.5f, 0.f),			color,			glm::vec2(1.0f, 1.0f),			glm::vec3(0.f, 0.f, -1.f),
+			glm::vec3(0.5f, -0.5f, 0.f),		color,			glm::vec2(1.0f, 0.0f),			glm::vec3(0.f, 0.f, -1.f),
+			glm::vec3(-0.5f, 0.5f, 0.f),		color,			glm::vec2(0.0f, 1.0f),			glm::vec3(0.f, 0.f, -1.f),
+			glm::vec3(-0.5f, -0.5f, 0.f),		color,			glm::vec2(0.0f, 0.0f),			glm::vec3(0.f, 0.f, -1.f),
 		};
 
 		GLuint i[] = {
 			3, 1, 2,
 			0, 2, 1,
 
-			0, 1, 2,
-			1, 3, 2
+			4, 5, 6,
+			5, 7, 6
 		};
 
 		setInitial(v, i, sizeof(v) / sizeof(Vertex), sizeof(i) / sizeof(GLuint));

@@ -13,7 +13,8 @@
 #include "WindowSystem.h"
 #include "Camera.h"
 #include "Mesh.h"
-
+#include "Light.h"
+#include "Circle.h"
 
 class RenderSystem
 {
@@ -23,15 +24,16 @@ private:
 	ShaderSubSystem* coreShader;
 
 	std::vector<Mesh*> meshes;
+	Light<Circle>* lightSource;
 
 	float fov = 45.f;
 	float near = 0.1f;
 	float far = 1000.f;
 
-	void usePerspective();
+	void usePerspective(GLuint program);
 	void configureOpenGLOptions();
 public:
-	RenderSystem(WindowSystem* ws, ShaderSubSystem* coreShader, std::vector<Mesh*>& meshes);
+	RenderSystem(WindowSystem* ws, ShaderSubSystem* coreShader, std::vector<Mesh*>& meshes, Light<Circle>* light);
 	~RenderSystem();
 
 	void Render();

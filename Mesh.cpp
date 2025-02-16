@@ -8,6 +8,8 @@ Mesh::Mesh(Primitive* object, ShaderSubSystem* shader, const char* texturePath) 
 		this->texture = new TextureSubSystem(texturePath);
 	}
 
+	shader->Use();
+
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
@@ -29,6 +31,10 @@ Mesh::~Mesh() {
 	glDeleteBuffers(1, &EBO);
 }
 
+void Mesh::UseShader() {
+	shader->Use();
+}
+
 void Mesh::Draw(GLenum textureID) {
 	glBindVertexArray(VAO);
 	if (textureID != NULL) {
@@ -41,4 +47,9 @@ void Mesh::Draw(GLenum textureID) {
 void Mesh::BindAttribute(const GLchar* name, GLint size, GLsizei stride, GLvoid* pointer) {
 	glBindVertexArray(VAO);
 	bindVertexAttribute(this->shader->program, name, size, stride, pointer);
+}
+
+void Mesh::BindUniform(const GLchar* name, const glm::vec3& value) {
+	shader->Use();
+	setUniformV3(shader->program, name, glm::value_ptr(value));
 }

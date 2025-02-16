@@ -24,12 +24,17 @@ public:
 	Mesh(Primitive* object, ShaderSubSystem* shader, const char* texturePath = nullptr);
 	~Mesh();
 
+	inline GLuint GetShaderID() { return shader->program; }
+	void UseShader();
+
 	void Draw(GLenum textureID = NULL);
+
 	/**
 	Usage:
 	mesh.BindAttribute("vertex_position", 3, sizeof(Vertex), (GLvoid*)offsetof(Vertex, position))
 	*/
 	void BindAttribute(const GLchar* name, GLint size, GLsizei stride, GLvoid* pointer);
+	void BindUniform(const GLchar* name, const glm::vec3& value);
 };
 
 #endif // !HEADERS_ENTITIES_MESH_H_

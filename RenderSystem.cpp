@@ -1,9 +1,10 @@
 #include "RenderSystem.h"
 
-RenderSystem::RenderSystem(WindowSystem* ws, ShaderSubSystem* coreShader, std::vector<Mesh*>& meshes) {
+RenderSystem::RenderSystem(WindowSystem* ws, ShaderSubSystem* coreShader, std::vector<Mesh*>& meshes, Light<Circle>* light) {
 	this->ws = ws;
 	this->coreShader = coreShader;
 	this->meshes = meshes;
+	this->lightSource = light;
 
 	configureOpenGLOptions();
 	TextureSubSystem::ConfigTextureParams();
@@ -14,15 +15,19 @@ RenderSystem::~RenderSystem() {
 }
 
 void RenderSystem::Render() {
-	// USE CORE SHADER
-	coreShader->Use();
+	float x = (float)glfwGetTime();
+	lightSource->Move(glm::vec3(sin(x) * cos(x) * 0.1f, 0.f, 0.f));
 
-	// SETUP SPACES
-	camera->Use(coreShader->program);
-	usePerspective();
-	
-	// DRAW MASHES
 	for (Mesh* mesh : meshes) {
+		mesh->UseShader();
+
+		camera->Use(mesh->GetShaderID());
+		usePerspective(mesh->GetShaderID());
+
+		mesh->BindUniform("light_color", lightSource->GetColor());
+		mesh->BindUniform("light_pos", lightSource->GetPosition());
+		mesh->BindUniform("cam_pos", camera->position);
+
 		mesh->Draw();
 	}
 }
@@ -32,9 +37,9 @@ void RenderSystem::Clear() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
-void RenderSystem::usePerspective() {
+void RenderSystem::usePerspective(GLuint program) {
 	glm::mat4 projection = glm::perspective(glm::radians(fov), ws->GetRatio(), near, far);
-	setUniformM4(coreShader->program, "projection", glm::value_ptr(projection));
+	setUniformM4(program, "projection", glm::value_ptr(projection));
 }
 
 void RenderSystem::configureOpenGLOptions(){

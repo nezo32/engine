@@ -12,7 +12,54 @@ ShaderSubSystem::ShaderSubSystem(const char* vertexPath, const char* fragmentPat
 
 	tempSource.clear();
 	linkProgram(vertex, fragment, geometry);
+
+	glUseProgram(0);
 }
+
+ShaderSubSystem::ShaderSubSystem(GLuint vertex, GLuint fragment, const char* geometryPath) {
+	program = glCreateProgram();
+
+	this->vertex = vertex;
+	if (strcmp(geometryPath, "") != 0)
+		geometry = loadShader(GL_GEOMETRY_SHADER, geometryPath);
+	fragment = fragment;
+
+	tempSource.clear();
+	linkProgram(vertex, fragment, geometry);
+
+	glUseProgram(0);
+}
+
+ShaderSubSystem::ShaderSubSystem(GLuint vertex, const char* fragmentPath, const char* geometryPath) {
+	program = glCreateProgram();
+
+	this->vertex = vertex;
+	if (strcmp(geometryPath, "") != 0)
+		geometry = loadShader(GL_GEOMETRY_SHADER, geometryPath);
+	if (strcmp(fragmentPath, "") != 0)
+		fragment = loadShader(GL_FRAGMENT_SHADER, fragmentPath);
+
+	tempSource.clear();
+	linkProgram(vertex, fragment, geometry);
+
+	glUseProgram(0);
+}
+
+ShaderSubSystem::ShaderSubSystem(const char* vertexPath, GLuint fragment, const char* geometryPath) {
+	program = glCreateProgram();
+
+	if (strcmp(vertexPath, "") != 0)
+		vertex = loadShader(GL_VERTEX_SHADER, vertexPath);
+	if (strcmp(geometryPath, "") != 0)
+		geometry = loadShader(GL_GEOMETRY_SHADER, geometryPath);
+	this->fragment = fragment;
+
+	tempSource.clear();
+	linkProgram(vertex, fragment, geometry);
+
+	glUseProgram(0);
+}
+
 
 ShaderSubSystem::~ShaderSubSystem() {
 	ClearShaders();

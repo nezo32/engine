@@ -43,6 +43,8 @@ public:
 	glm::mat4 Move(const glm::vec3& axis);
 	glm::mat4 Scale(const glm::vec3& axis);
 
+
+	inline glm::vec3 GetPosition() { return { model[3][0], model[3][1], model[3][2] };  }
 	inline glm::mat4 GetModel() { return model; }
 	inline Vertex* GetVertices() { return vertices.data(); }
 	inline GLuint* GetIndices() { return indices.data(); }

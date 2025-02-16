@@ -8,6 +8,10 @@ void setUniform1f(GLuint program, const GLchar* name, GLfloat value) {
     glUniform1f(glGetUniformLocation(program, name), value);
 }
 
+void setUniformV3(GLuint program, const GLchar* name, const glm::f32* value) {
+    glUniform3fv(glGetUniformLocation(program, name), 1, value);
+}
+
 void setUniformM4(GLuint program, const GLchar* name, const glm::f32* value) {
     glUniformMatrix4fv(glGetUniformLocation(program, name), 1, GL_FALSE, value);
 }

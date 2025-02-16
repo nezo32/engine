@@ -29,6 +29,12 @@ public:
 	void ClearShaders();
 	void Use();
 	ShaderSubSystem(const char* vertexPath, const char* fragmentPath, const char* geometryPath = "");
+
+	ShaderSubSystem(GLuint vertex, GLuint fragment, const char* geometryPath = "");
+
+	ShaderSubSystem(GLuint vertex, const char* fragmentPath, const char* geometryPath = "");
+	ShaderSubSystem(const char* vertexPath, GLuint fragment, const char* geometryPath = "");
+
 	~ShaderSubSystem();
 };
 

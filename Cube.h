@@ -9,55 +9,55 @@ public:
 		preferableDrawType = DRAW_TYPE_ARRAY;
 
 		Vertex v[] = {
-			// POSITION							// COLOR			// TEXTURE POSITION
-			
+			// POSITION							// COLOR	// TEXTURE POSITION								
+
 			// FRONT
-			glm::vec3(0.5f, -0.5f,  0.5f),		color,				glm::vec2(1.0f, 0.0f), // BOTTOM	RIGHT	FRONT
-			glm::vec3(0.5f,  0.5f,  0.5f),		color,				glm::vec2(1.0f, 1.0f), // TOP		RIGHT	FRONT
-			glm::vec3(-0.5f, -0.5f,  0.5f),		color,				glm::vec2(0.0f, 0.0f), // BOTTOM	LEFT	FRONT
-			glm::vec3(0.5f,  0.5f,  0.5f),		color,				glm::vec2(1.0f, 1.0f), // TOP		RIGHT	FRONT
-			glm::vec3(-0.5f,  0.5f,  0.5f),		color,				glm::vec2(0.0f, 1.0f), // TOP		LEFT	FRONT 
-			glm::vec3(-0.5f, -0.5f,  0.5f),		color,				glm::vec2(0.0f, 0.0f), // BOTTOM	LEFT	FRONT
+			glm::vec3(0.5f, -0.5f,  0.5f),		color,		glm::vec2(1.0f, 0.0f),		glm::vec3(0.f, 0.f, 1.f),			// BOTTOM	RIGHT	FRONT
+			glm::vec3(0.5f,  0.5f,  0.5f),		color,		glm::vec2(1.0f, 1.0f),		glm::vec3(0.f, 0.f, 1.f),			// TOP		RIGHT	FRONT
+			glm::vec3(-0.5f, -0.5f,  0.5f),		color,		glm::vec2(0.0f, 0.0f),		glm::vec3(0.f, 0.f, 1.f),			// BOTTOM	LEFT	FRONT
+			glm::vec3(0.5f,  0.5f,  0.5f),		color,		glm::vec2(1.0f, 1.0f),		glm::vec3(0.f, 0.f, 1.f),			// TOP		RIGHT	FRONT
+			glm::vec3(-0.5f,  0.5f,  0.5f),		color,		glm::vec2(0.0f, 1.0f),		glm::vec3(0.f, 0.f, 1.f),			// TOP		LEFT	FRONT 
+			glm::vec3(-0.5f, -0.5f,  0.5f),		color,		glm::vec2(0.0f, 0.0f),		glm::vec3(0.f, 0.f, 1.f),			// BOTTOM	LEFT	FRONT
 
 			// BACK
-			glm::vec3(0.5f,  0.5f,  -0.5f),		color,				glm::vec2(1.0f, 1.0f), // TOP		RIGHT	BACK
-			glm::vec3(0.5f, -0.5f,  -0.5f),		color,				glm::vec2(1.0f, 0.0f), // BOTTOM	RIGHT	BACK
-			glm::vec3(-0.5f, -0.5f,  -0.5f),	color,				glm::vec2(0.0f, 0.0f), // BOTTOM	LEFT	BACK
-			glm::vec3(-0.5f,  0.5f,  -0.5f),	color,				glm::vec2(0.0f, 1.0f), // TOP		LEFT	BACK 
-			glm::vec3(0.5f,  0.5f,  -0.5f),		color,				glm::vec2(1.0f, 1.0f), // TOP		RIGHT	BACK
-			glm::vec3(-0.5f, -0.5f,  -0.5f),	color,				glm::vec2(0.0f, 0.0f), // BOTTOM	LEFT	BACK
+			glm::vec3(0.5f,  0.5f,  -0.5f),		color,		glm::vec2(1.0f, 1.0f),		glm::vec3(0.f, 0.f, -1.f),			// TOP		RIGHT	BACK
+			glm::vec3(0.5f, -0.5f,  -0.5f),		color,		glm::vec2(1.0f, 0.0f),		glm::vec3(0.f, 0.f, -1.f),			// BOTTOM	RIGHT	BACK
+			glm::vec3(-0.5f, -0.5f,  -0.5f),	color,		glm::vec2(0.0f, 0.0f),		glm::vec3(0.f, 0.f, -1.f),			// BOTTOM	LEFT	BACK
+			glm::vec3(-0.5f,  0.5f,  -0.5f),	color,		glm::vec2(0.0f, 1.0f),		glm::vec3(0.f, 0.f, -1.f),			// TOP		LEFT	BACK 
+			glm::vec3(0.5f,  0.5f,  -0.5f),		color,		glm::vec2(1.0f, 1.0f),		glm::vec3(0.f, 0.f, -1.f),			// TOP		RIGHT	BACK
+			glm::vec3(-0.5f, -0.5f,  -0.5f),	color,		glm::vec2(0.0f, 0.0f),		glm::vec3(0.f, 0.f, -1.f),			// BOTTOM	LEFT	BACK
 
 			// UP
-			glm::vec3(-0.5f,  0.5f,  0.5f),		color,				glm::vec2(0.0f, 1.0f), // TOP		LEFT	FRONT 
-			glm::vec3(0.5f,  0.5f,  0.5f),		color,				glm::vec2(1.0f, 1.0f), // TOP		RIGHT	FRONT
-			glm::vec3(0.5f,  0.5f,  -0.5f),		color,				glm::vec2(1.0f, 0.0f), // TOP		RIGHT	BACK
-			glm::vec3(-0.5f,  0.5f,  0.5f),		color,				glm::vec2(0.0f, 1.0f), // TOP		LEFT	FRONT 
-			glm::vec3(0.5f,  0.5f,  -0.5f),		color,				glm::vec2(1.0f, 0.0f), // TOP		RIGHT	BACK
-			glm::vec3(-0.5f,  0.5f,  -0.5f),	color,				glm::vec2(0.0f, 0.0f), // TOP		LEFT	BACK 
+			glm::vec3(-0.5f,  0.5f,  0.5f),		color,		glm::vec2(0.0f, 1.0f),		glm::vec3(0.f, 1.f, 0.f),			// TOP		LEFT	FRONT 
+			glm::vec3(0.5f,  0.5f,  0.5f),		color,		glm::vec2(1.0f, 1.0f),		glm::vec3(0.f, 1.f, 0.f),			// TOP		RIGHT	FRONT
+			glm::vec3(0.5f,  0.5f,  -0.5f),		color,		glm::vec2(1.0f, 0.0f),		glm::vec3(0.f, 1.f, 0.f),			// TOP		RIGHT	BACK
+			glm::vec3(-0.5f,  0.5f,  0.5f),		color,		glm::vec2(0.0f, 1.0f),		glm::vec3(0.f, 1.f, 0.f),			// TOP		LEFT	FRONT 
+			glm::vec3(0.5f,  0.5f,  -0.5f),		color,		glm::vec2(1.0f, 0.0f),		glm::vec3(0.f, 1.f, 0.f),			// TOP		RIGHT	BACK
+			glm::vec3(-0.5f,  0.5f,  -0.5f),	color,		glm::vec2(0.0f, 0.0f),		glm::vec3(0.f, 1.f, 0.f),			// TOP		LEFT	BACK 
 
 			// BOTTOM
-			glm::vec3(0.5f,  -0.5f,  0.5f),		color,				glm::vec2(1.0f, 1.0f), // BOTTOM	RIGHT	FRONT
-			glm::vec3(-0.5f,  -0.5f,  0.5f),	color,				glm::vec2(0.0f, 1.0f), // BOTTOM	LEFT	FRONT 
-			glm::vec3(0.5f,  -0.5f,  -0.5f),	color,				glm::vec2(1.0f, 0.0f), // BOTTOM	RIGHT	BACK
-			glm::vec3(0.5f,  -0.5f,  -0.5f),	color,				glm::vec2(1.0f, 0.0f), // BOTTOM	RIGHT	BACK
-			glm::vec3(-0.5f,  -0.5f,  0.5f),	color,				glm::vec2(0.0f, 1.0f), // BOTTOM	LEFT	FRONT 
-			glm::vec3(-0.5f,  -0.5f,  -0.5f),	color,				glm::vec2(0.0f, 0.0f), // BOTTOM	LEFT	BACK
+			glm::vec3(0.5f,  -0.5f,  0.5f),		color,		glm::vec2(1.0f, 1.0f),		glm::vec3(0.f, -1.f, 0.f),			// BOTTOM	RIGHT	FRONT
+			glm::vec3(-0.5f,  -0.5f,  0.5f),	color,		glm::vec2(0.0f, 1.0f),		glm::vec3(0.f, -1.f, 0.f),			// BOTTOM	LEFT	FRONT 
+			glm::vec3(0.5f,  -0.5f,  -0.5f),	color,		glm::vec2(1.0f, 0.0f),		glm::vec3(0.f, -1.f, 0.f),			// BOTTOM	RIGHT	BACK
+			glm::vec3(0.5f,  -0.5f,  -0.5f),	color,		glm::vec2(1.0f, 0.0f),		glm::vec3(0.f, -1.f, 0.f),			// BOTTOM	RIGHT	BACK
+			glm::vec3(-0.5f,  -0.5f,  0.5f),	color,		glm::vec2(0.0f, 1.0f),		glm::vec3(0.f, -1.f, 0.f),			// BOTTOM	LEFT	FRONT 
+			glm::vec3(-0.5f,  -0.5f,  -0.5f),	color,		glm::vec2(0.0f, 0.0f),		glm::vec3(0.f, -1.f, 0.f),			// BOTTOM	LEFT	BACK
 
 			// LEFT
-			glm::vec3(-0.5f,  0.5f,  0.5f),		color,				glm::vec2(1.0f, 1.0f), // TOP		LEFT	FRONT
-			glm::vec3(-0.5f,  0.5f,  -0.5f),	color,				glm::vec2(0.0f, 1.0f), // TOP		LEFT	BACK 
-			glm::vec3(-0.5f, -0.5f,  0.5f),		color,				glm::vec2(1.0f, 0.0f), // BOTTOM	LEFT	FRONT
-			glm::vec3(-0.5f, -0.5f,  0.5f),		color,				glm::vec2(1.0f, 0.0f), // BOTTOM	LEFT	FRONT
-			glm::vec3(-0.5f,  0.5f,  -0.5f),	color,				glm::vec2(0.0f, 1.0f), // TOP		LEFT	BACK 
-			glm::vec3(-0.5f,  -0.5f,  -0.5f),	color,				glm::vec2(0.0f, 0.0f), // BOTTOM	LEFT	BACK 
+			glm::vec3(-0.5f,  0.5f,  0.5f),		color,		glm::vec2(1.0f, 1.0f),		glm::vec3(-1.f, 0.f, 0.f),			// TOP		LEFT	FRONT
+			glm::vec3(-0.5f,  0.5f,  -0.5f),	color,		glm::vec2(0.0f, 1.0f),		glm::vec3(-1.f, 0.f, 0.f),			// TOP		LEFT	BACK 
+			glm::vec3(-0.5f, -0.5f,  0.5f),		color,		glm::vec2(1.0f, 0.0f),		glm::vec3(-1.f, 0.f, 0.f),			// BOTTOM	LEFT	FRONT
+			glm::vec3(-0.5f, -0.5f,  0.5f),		color,		glm::vec2(1.0f, 0.0f),		glm::vec3(-1.f, 0.f, 0.f),			// BOTTOM	LEFT	FRONT
+			glm::vec3(-0.5f,  0.5f,  -0.5f),	color,		glm::vec2(0.0f, 1.0f),		glm::vec3(-1.f, 0.f, 0.f),			// TOP		LEFT	BACK 
+			glm::vec3(-0.5f,  -0.5f,  -0.5f),	color,		glm::vec2(0.0f, 0.0f),		glm::vec3(-1.f, 0.f, 0.f),			// BOTTOM	LEFT	BACK 
 
 			// RIGHT
-			glm::vec3(0.5f,  0.5f,  -0.5f),		color,				glm::vec2(0.0f, 1.0f), // TOP		RIGHT	BACK 
-			glm::vec3(0.5f,  0.5f,  0.5f),		color,				glm::vec2(1.0f, 1.0f), // TOP		RIGHT	FRONT
-			glm::vec3(0.5f, -0.5f,  0.5f),		color,				glm::vec2(1.0f, 0.0f), // BOTTOM	RIGHT	FRONT
-			glm::vec3(0.5f,  0.5f,  -0.5f),		color,				glm::vec2(0.0f, 1.0f), // TOP		RIGHT	BACK 
-			glm::vec3(0.5f, -0.5f,  0.5f),		color,				glm::vec2(1.0f, 0.0f), // BOTTOM	RIGHT	FRONT
-			glm::vec3(0.5f,  -0.5f,  -0.5f),	color,				glm::vec2(0.0f, 0.0f), // BOTTOM	RIGHT	BACK 
+			glm::vec3(0.5f,  0.5f,  -0.5f),		color,		glm::vec2(0.0f, 1.0f),		glm::vec3(1.f, 0.f, 0.f),			// TOP		RIGHT	BACK 
+			glm::vec3(0.5f,  0.5f,  0.5f),		color,		glm::vec2(1.0f, 1.0f),		glm::vec3(1.f, 0.f, 0.f),			// TOP		RIGHT	FRONT
+			glm::vec3(0.5f, -0.5f,  0.5f),		color,		glm::vec2(1.0f, 0.0f),		glm::vec3(1.f, 0.f, 0.f),			// BOTTOM	RIGHT	FRONT
+			glm::vec3(0.5f,  0.5f,  -0.5f),		color,		glm::vec2(0.0f, 1.0f),		glm::vec3(1.f, 0.f, 0.f),			// TOP		RIGHT	BACK 
+			glm::vec3(0.5f, -0.5f,  0.5f),		color,		glm::vec2(1.0f, 0.0f),		glm::vec3(1.f, 0.f, 0.f),			// BOTTOM	RIGHT	FRONT
+			glm::vec3(0.5f,  -0.5f,  -0.5f),	color,		glm::vec2(0.0f, 0.0f),		glm::vec3(1.f, 0.f, 0.f),			// BOTTOM	RIGHT	BACK 
 
 		};
 

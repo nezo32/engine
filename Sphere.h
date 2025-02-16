@@ -109,6 +109,7 @@ public:
                 glm::vec3({vertices[i], vertices[i + 1], vertices[i + 2]}),
                 color,
                 glm::vec2({texCoords[j], texCoords[j + 1]}),
+                glm::vec3({normals[i], normals[i + 1], normals[i + 2]}),
             });
         }
 

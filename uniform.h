@@ -8,6 +8,7 @@
 
 void setUniform1i(GLuint program, const GLchar* name, GLuint value);
 void setUniform1f(GLuint program, const GLchar* name, GLfloat value);
+void setUniformV3(GLuint program, const GLchar* name, const glm::f32* value);
 void setUniformM4(GLuint program, const GLchar* name, const glm::f32* value);
 
 #endif // !HEADERS_GLOBAL_UNIFORM_H
